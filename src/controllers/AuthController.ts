@@ -1,9 +1,12 @@
 import { Application, Request, Response } from "express";
 import { Controller, RegisterOptions } from "../assets/libs/Controller";
+import { PrismaClient } from "@prisma/client";
 
 export class AuthController extends Controller {
-  constructor(app: Application) {
+  private prisma: PrismaClient;
+  constructor(app: Application, prisma: PrismaClient) {
     super(app);
+    this.prisma = prisma;
   }
 
   public register(options?: RegisterOptions): void {
