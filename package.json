@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node ./src/index.js",
     "dev": "nodemon ./src/index.ts",
-    "build": "tsc"
+    "build": "tsc -p ./src --outDir ./dist",
+    "prod": "node ./dist/index.js"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
