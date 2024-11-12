@@ -19,5 +19,5 @@ new AuthController(app).register({
 });
 
 app.listen(envConfig.service.port, () => {
-  console.log("Server is running on port 3000");
+  console.log(`Server is running on port ${envConfig.service.port}`);
 });

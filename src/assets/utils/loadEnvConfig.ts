@@ -5,7 +5,7 @@ export default function () {
 
   return {
     service: {
-      port: process.env.PORT || 3000,
+      port: process.env.SERVICE_PORT || 3000,
     },
   };
 }
