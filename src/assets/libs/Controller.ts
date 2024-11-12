@@ -1,4 +1,5 @@
-import { Application, RequestHandler, Router } from "express";
+import { RequestHandler, Router } from "express";
+import { Context } from "./Context";
 
 export interface RegisterOptions {
   router?: {
@@ -8,9 +9,9 @@ export interface RegisterOptions {
 }
 
 export class Controller {
-  protected app: Application;
-  constructor(app: Application) {
-    this.app = app;
+  protected ctx;
+  constructor(ctx: Context) {
+    this.ctx = ctx;
   }
 
   public register(options?: RegisterOptions) {
@@ -27,6 +28,6 @@ export class Controller {
       router.use(options.middlewares);
     }
     cb(router);
-    this.app.use(options?.router?.path || "/", router);
+    this.ctx.app.use(options?.router?.path || "/", router);
   }
 }

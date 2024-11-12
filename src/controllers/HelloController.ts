@@ -1,9 +1,10 @@
-import { Application, Request, Response } from "express";
+import { Request, Response } from "express";
 import { Controller, RegisterOptions } from "../assets/libs/Controller";
+import { Context } from "../assets/libs/Context";
 
 export class HelloController extends Controller {
-  constructor(app: Application) {
-    super(app);
+  constructor(ctx: Context) {
+    super(ctx);
   }
 
   public register(options?: RegisterOptions): void {

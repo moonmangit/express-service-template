@@ -1,19 +1,25 @@
+import { AuthController } from "./controllers/AuthController";
+import { Context } from "./assets/libs/Context";
+import { createAuthMiddleware } from "./middlewares/AuthMiddleware";
+import { HelloController } from "./controllers/HelloController";
+import { PrismaClient } from "@prisma/client";
 import express from "express";
 import loadEnvConfig from "./assets/utils/loadEnvConfig";
-import { HelloController } from "./controllers/HelloController";
-import { AuthController } from "./controllers/AuthController";
-import { createAuthMiddleware } from "./middlewares/AuthMiddleware";
-import { PrismaClient } from "@prisma/client";
 
 const envConfig = loadEnvConfig();
 const app = express();
 const prisma = new PrismaClient();
+const ctx: Context = {
+  app,
+  prisma,
+  envConfig,
+};
 
-const authMiddleware = createAuthMiddleware();
+const authMiddleware = createAuthMiddleware(ctx);
 
 // controller
-new HelloController(app).register();
-new AuthController(app, prisma).register({
+new HelloController(ctx).register();
+new AuthController(ctx).register({
   router: {
     path: "/auth",
   },
